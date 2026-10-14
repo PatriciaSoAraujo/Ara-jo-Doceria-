@@ -246,7 +246,7 @@
 
   <footer>
     <strong>Araújo Doceria</strong><br>
-    Feito com amor e açúcar 💗<br>
+    O jeito mais facil de adoçar o seu dia 💗<br>
     Encomendas e informações pelo WhatsApp.<br>
     <small>© <span id="ano"></span> Araújo Doceria</small>
   </footer>
@@ -277,44 +277,40 @@
     // com código do Brasil, DDD e número, somente números.
     const WHATSAPP = "5531993082039";
 
-    const produtos = [
-      {
-        id: 1, nome: "Brigadeiro", categoria: "Docinhos",
-        descricao: "Tradicional, cremoso e feito com carinho.",
-        preco: 3.00,
-        imagem: "https://images.unsplash.com/photo-1548907040-4d42baa9e7f4?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        id: 2, nome: "Beijinho", categoria: "Docinhos",
-        descricao: "Delícia de coco com um toque especial.",
-        preco: 3.00,
-        imagem: "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        id: 3, nome: "Bolo de chocolate", categoria: "Bolos",
-        descricao: "Massa fofinha para adoçar seu dia.",
-        preco: 45.00,
-        imagem: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        id: 4, nome: "Bolo com morangos", categoria: "Bolos",
-        descricao: "Uma combinação delicada e deliciosa.",
-        preco: 60.00,
-        imagem: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        id: 5, nome: "Cupcake", categoria: "Bolos",
-        descricao: "Pequeno no tamanho, grande no sabor.",
-        preco: 8.00,
-        imagem: "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        id: 6, nome: "Morango com chocolate", categoria: "Especiais",
-        descricao: "Uma combinação para quem ama doces.",
-        preco: 10.00,
-        imagem: "https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=600&q=80"
-      }
-    ];
+const produtos = [
+  {
+    id: 1,
+    nome: "Brownie 5x5",
+    categoria: "Brownies",
+    descricao: "Brownie individual de chocolate, tamanho 5x5 cm.",
+    preco: 6.00,
+    imagem: "imagens/brownie.jpg"
+  },
+  {
+    id: 2,
+    nome: "Fatia Maracujá Black",
+    categoria: "Fatias de bolo",
+    descricao: "Uma combinação irresistível de chocolate e maracujá.",
+    preco: 17.00,
+    imagem: "imagens/maracuja-black.jpg"
+  },
+  {
+    id: 3,
+    nome: "Fatia Prestígio",
+    categoria: "Fatias de bolo",
+    descricao: "Chocolate com recheio de coco.",
+    preco: 16.00,
+    imagem: "imagens/prestigio.jpg"
+  },
+  {
+    id: 4,
+    nome: "Bolo no Pote",
+    categoria: "Bolos no pote",
+    descricao: "Camadas deliciosas para saborear a qualquer hora.",
+    preco: 14.00,
+    imagem: "imagens/bolo-no-pote.jpg"
+  }
+];
 
     let carrinho = {};
     let filtro = "Todos";
