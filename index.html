@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff5f7">
+  <title>Araújo Doceria | Feito com amor</title>
+  <style>
+    :root {
+      --rosa: #e88da8;
+      --rosa-claro: #fff0f4;
+      --vinho: #713b50;
+      --creme: #fffaf5;
+      --texto: #49383e;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--creme);
+      color: var(--texto);
+    }
+
+    header {
+      background: var(--rosa-claro);
+      text-align: center;
+      padding: 27px 16px 22px;
+      border-bottom: 1px solid #f5dce4;
+    }
+
+    .logo {
+      font-family: Georgia, serif;
+      font-size: clamp(30px, 7vw, 43px);
+      color: var(--vinho);
+      margin: 0;
+    }
+
+    header p { margin: 8px 0 0; color: #8e6373; }
+
+    .hero {
+      padding: 42px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, #fff0f4, #fffaf5);
+    }
+
+    .hero h2 {
+      font-family: Georgia, serif;
+      font-size: clamp(27px, 6vw, 38px);
+      color: var(--vinho);
+      margin: 0 0 12px;
+    }
+
+    .hero p {
+      max-width: 480px;
+      margin: 0 auto 22px;
+      line-height: 1.6;
+    }
+
+    .botao {
+      display: inline-block;
+      background: var(--rosa);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      padding: 13px 22px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    main { max-width: 1050px; margin: auto; padding: 30px 16px; }
+
+    h2.titulo {
+      text-align: center;
+      font-family: Georgia, serif;
+      color: var(--vinho);
+      font-size: 29px;
+      margin: 10px 0 24px;
+    }
+
+    .categorias {
+      display: flex;
+      justify-content: center;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    .categoria {
+      background: white;
+      border: 1px solid #f0cbd7;
+      border-radius: 20px;
+      padding: 9px 15px;
+      color: var(--vinho);
+      cursor: pointer;
+    }
+
+    .categoria.ativa { background: var(--rosa); color: white; }
+
+    .produtos {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .produto {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 3px 14px #713b5010;
+      border: 1px solid #f6e6eb;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .produto img {
+      width: 100%;
+      height: 145px;
+      object-fit: cover;
+      background: var(--rosa-claro);
+    }
+
+    .produto-info { padding: 12px; flex: 1; display: flex; flex-direction: column; }
+
+    .produto h3 { font-size: 16px; margin: 0 0 7px; color: var(--vinho); }
+    .produto p { font-size: 13px; line-height: 1.4; margin: 0 0 12px; flex: 1; }
+    .preco { font-size: 18px; font-weight: bold; margin-bottom: 12px; color: #a64e70; }
+    .produto .botao { padding: 10px 8px; font-size: 13px; text-align: center; }
+
+    .aviso {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 28px;
+      line-height: 1.6;
+    }
+
+    .carrinho {
+      position: fixed;
+      z-index: 5;
+      bottom: 14px;
+      right: 14px;
+      left: 14px;
+      max-width: 500px;
+      margin: auto;
+      background: var(--vinho);
+      color: white;
+      padding: 14px 18px;
+      border-radius: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 18px #0002;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      background: var(--rosa-claro);
+      padding: 30px 18px 90px;
+      margin-top: 35px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    #modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #0007;
+      z-index: 10;
+      padding: 18px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-conteudo {
+      width: 100%;
+      max-width: 440px;
+      max-height: 85vh;
+      overflow-y: auto;
+      background: white;
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .linha-carrinho {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .campo {
+      width: 100%;
+      padding: 12px;
+      margin: 7px 0;
+      border: 1px solid #e5cbd4;
+      border-radius: 9px;
+      font: inherit;
+    }
+
+    .acoes { display: flex; gap: 10px; margin-top: 15px; }
+    .acoes button { flex: 1; }
+    .secundario { background: #eee; color: #49383e; }
+
+    @media (min-width: 650px) {
+      .produtos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+      .produto img { height: 200px; }
+    }
+
+    @media (min-width: 900px) {
+      .produtos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="logo">Araújo Doceria 🍰</h1>
+    <p>Pequenos doces, grandes momentos!</p>
+  </header>
+
+  <section class="hero">
+    <h2>Um toque de doçura no seu dia</h2>
+    <p>Delícias preparadas com carinho para deixar seus momentos ainda mais especiais.</p>
+    <a class="botao" href="#catalogo">Ver nossos doces ♡</a>
+  </section>
+
+  <main id="catalogo">
+    <h2 class="titulo">Nosso catálogo</h2>
+    <div class="categorias" id="categorias"></div>
+    <div class="produtos" id="produtos"></div>
+    <div class="aviso">
+      💕 <strong>Feito com carinho para você!</strong><br>
+      Escolha seus favoritos e envie seu pedido pelo WhatsApp.
+      <p>Consulte disponibilidade, sabores e valores antes de finalizar.</p>
+    </div>
+  </main>
+
+  <footer>
+    <strong>Araújo Doceria</strong><br>
+    Feito com amor e açúcar 💗<br>
+    Encomendas e informações pelo WhatsApp.<br>
+    <small>© <span id="ano"></span> Araújo Doceria</small>
+  </footer>
+
+  <button class="carrinho" onclick="abrirCarrinho()" aria-label="Abrir carrinho">
+    <span>🛒 Meu pedido (<span id="quantidade">0</span>)</span>
+    <span id="total">R$ 0,00</span>
+  </button>
+
+  <div id="modal" onclick="if(event.target===this)fecharCarrinho()">
+    <div class="modal-conteudo">
+      <h2 style="color:#713b50;margin-top:0">Seu pedido 🛍️</h2>
+      <div id="itens-carrinho"></div>
+      <h3 id="total-modal">Total: R$ 0,00</h3>
+      <input id="nome" class="campo" placeholder="Seu nome" autocomplete="name">
+      <input id="endereco" class="campo" placeholder="Endereço ou retirada">
+      <textarea id="observacao" class="campo" placeholder="Observações, sabores ou detalhes" rows="3"></textarea>
+      <div class="acoes">
+        <button class="botao secundario" onclick="fecharCarrinho()">Continuar comprando</button>
+        <button class="botao" onclick="finalizarPedido()">Pedir pelo WhatsApp</button>
+      </div>
+      <p style="font-size:12px;color:#777">O pedido será enviado para confirmação. A disponibilidade e a entrega serão combinadas pelo WhatsApp.</p>
+    </div>
+  </div>
+
+  <script>
+    // IMPORTANTE: substitua pelo WhatsApp da doceria,
+    // com código do Brasil, DDD e número, somente números.
+    const WHATSAPP = "5511999999999";
+
+    const produtos = [
+      {
+        id: 1, nome: "Brigadeiro", categoria: "Docinhos",
+        descricao: "Tradicional, cremoso e feito com carinho.",
+        preco: 3.00,
+        imagem: "https://images.unsplash.com/photo-1548907040-4d42baa9e7f4?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 2, nome: "Beijinho", categoria: "Docinhos",
+        descricao: "Delícia de coco com um toque especial.",
+        preco: 3.00,
+        imagem: "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 3, nome: "Bolo de chocolate", categoria: "Bolos",
+        descricao: "Massa fofinha para adoçar seu dia.",
+        preco: 45.00,
+        imagem: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 4, nome: "Bolo com morangos", categoria: "Bolos",
+        descricao: "Uma combinação delicada e deliciosa.",
+        preco: 60.00,
+        imagem: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 5, nome: "Cupcake", categoria: "Bolos",
+        descricao: "Pequeno no tamanho, grande no sabor.",
+        preco: 8.00,
+        imagem: "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 6, nome: "Morango com chocolate", categoria: "Especiais",
+        descricao: "Uma combinação para quem ama doces.",
+        preco: 10.00,
+        imagem: "https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=600&q=80"
+      }
+    ];
+
+    let carrinho = {};
+    let filtro = "Todos";
+    const dinheiro = n => n.toLocaleString("pt-BR", {
+      style: "currency", currency: "BRL"
+    });
+
+    document.getElementById("ano").textContent = new Date().getFullYear();
+
+    function renderCategorias() {
+      const nomes = ["Todos", ...new Set(produtos.map(p => p.categoria))];
+      document.getElementById("categorias").innerHTML = nomes.map(nome =>
+        `<button class="categoria ${filtro===nome?"ativa":""}"
+        onclick="filtrar('${nome}')">${nome}</button>`
+      ).join("");
+    }
+
+    function renderProdutos() {
+      const lista = produtos.filter(p =>
+        filtro === "Todos" || p.categoria === filtro
+      );
+      document.getElementById("produtos").innerHTML = lista.map(p => `
+        <article class="produto">
+          <img src="${p.imagem}" alt="${p.nome}" loading="lazy"
+            onerror="this.style.display='none'">
+          <div class="produto-info">
+            <h3>${p.nome}</h3>
+            <p>${p.descricao}</p>
+            <div class="preco">${dinheiro(p.preco)}</div>
+            <button class="botao" onclick="adicionar(${p.id})">
+              + Adicionar ao pedido
+            </button>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function filtrar(nome) {
+      filtro = nome;
+      renderCategorias();
+      renderProdutos();
+    }
+
+    function adicionar(id) {
+      carrinho[id] = (carrinho[id] || 0) + 1;
+      atualizarCarrinho();
+    }
+
+    function alterar(id, quantidade) {
+      carrinho[id] = (carrinho[id] || 0) + quantidade;
+      if (carrinho[id] <= 0) delete carrinho[id];
+      atualizarCarrinho();
+      abrirCarrinho();
+    }
+
+    function calcularTotal() {
+      return produtos.reduce((soma, p) =>
+        soma + p.preco * (carrinho[p.id] || 0), 0
+      );
+    }
+
+    function atualizarCarrinho() {
+      const quantidade = Object.values(carrinho).reduce((a,b) => a+b, 0);
+      document.getElementById("quantidade").textContent = quantidade;
+      document.getElementById("total").textContent = dinheiro(calcularTotal());
+    }
+
+    function abrirCarrinho() {
+      document.getElementById("modal").style.display = "flex";
+      const itens = produtos.filter(p => carrinho[p.id]);
+      document.getElementById("itens-carrinho").innerHTML = itens.length
+        ? itens.map(p => `
+          <div class="linha-carrinho">
+            <div><strong>${p.nome}</strong><br>
+            ${dinheiro(p.preco)} × ${carrinho[p.id]}<br>
+            <strong>${dinheiro(p.preco*carrinho[p.id])}</strong></div>
+            <div style="white-space:nowrap">
+              <button onclick="alterar(${p.id},-1)">−</button>
+              ${carrinho[p.id]}
+              <button onclick="alterar(${p.id},1)">+</button>
+            </div>
+          </div>
+        `).join("")
+        : "<p>Seu carrinho está vazio. Escolha um doce delicioso!</p>";
+
+      document.getElementById("total-modal").textContent =
+        "Total: " + dinheiro(calcularTotal());
+    }
+
+    function fecharCarrinho() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    function finalizarPedido() {
+      if (!Object.keys(carrinho).length) {
+        alert("Adicione pelo menos um produto ao pedido.");
+        return;
+      }
+
+      if (WHATSAPP === "5511999999999") {
+        alert("Antes de pedir, configure o número real do WhatsApp da doceria no código.");
+        return;
+      }
+
+      const nome = document.getElementById("nome").value.trim();
+      const endereco = document.getElementById("endereco").value.trim();
+      const observacao = document.getElementById("observacao").value.trim();
+
+      if (!nome) {
+        alert("Por favor, informe seu nome.");
+        document.getElementById("nome").focus();
+        return;
+      }
+
+      let mensagem = `Olá! Quero fazer um pedido na Araújo Doceria 🍰\n\nNome: ${nome}\nEntrega/retirada: ${endereco || "A combinar"}\n\n`;
+      produtos.filter(p => carrinho[p.id]).forEach(p => {
+        mensagem += `${carrinho[p.id]}x ${p.nome} — ${dinheiro(p.preco*carrinho[p.id])}\n`;
+      });
+
+      mensagem += `\nTotal dos produtos: ${dinheiro(calcularTotal())}`;
+      if (observacao) mensagem += `\nObservações: ${observacao}`;
+      mensagem += "\n\nPor favor, confirme a disponibilidade, a entrega e o pagamento.";
+
+      window.open(
+        "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(mensagem),
+        "_blank"
+      );
+    }
+
+    renderCategorias();
+    renderProdutos();
+    atualizarCarrinho();
+  </script>
+</body>
+</html>
